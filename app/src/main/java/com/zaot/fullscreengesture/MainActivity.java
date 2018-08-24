@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding activityMainBinding;
     public View.OnClickListener startService;
+    public View.OnClickListener stopService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
                     floatIntent.putExtra(FullScreenService.ACTION, FullScreenService.SHOW);
                     MainActivity.this.startService(floatIntent);
                 }
+            }
+        };
+
+        stopService = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent floatIntent = new Intent(MainActivity.this, FullScreenService.class);
+                floatIntent.putExtra(FullScreenService.ACTION, FullScreenService.SHOW);
+                MainActivity.this.stopService(floatIntent);
             }
         };
     }

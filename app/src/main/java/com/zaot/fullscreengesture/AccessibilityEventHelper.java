@@ -17,7 +17,7 @@ public class AccessibilityEventHelper {
             AccessibilityEvent.TYPE_GESTURE_DETECTION_END);
         event.setClassName(view.getClass().getName());
         event.setPackageName(view.getContext().getPackageName());
-        event.getText().add(Constants.BACK_BUTTON_ACTION);
+        event.getText().add(action);
         view.dispatchPopulateAccessibilityEvent(event);
         accessibilityManager.sendAccessibilityEvent(event);
     }
