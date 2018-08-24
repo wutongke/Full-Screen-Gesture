@@ -1,10 +1,13 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.service;
 
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import com.zaot.fullscreengesture.ArrayFloatingView;
+import com.zaot.fullscreengesture.MainActivity;
+import com.zaot.fullscreengesture.R;
 
 public class FullScreenService extends Service {
 

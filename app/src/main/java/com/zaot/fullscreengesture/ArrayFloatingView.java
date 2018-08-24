@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import com.zaot.fullscreengesture.utils.Constants;
 
 public class ArrayFloatingView extends FrameLayout {
 

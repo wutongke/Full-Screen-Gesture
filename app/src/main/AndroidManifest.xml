@@ -20,7 +20,7 @@
         </activity>
 
         <service
-            android:name=".FullScreenAccessibilityService"
+            android:name=".service.FullScreenAccessibilityService"
             android:label="手势辅助"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
@@ -31,7 +31,7 @@
                 android:resource="@xml/accessibility_service_config"/> <!--注意此处-->
         </service>
 
-        <service android:name=".FullScreenService"/>
+        <service android:name=".service.FullScreenService"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.utils;
 
 import android.util.Log;
 

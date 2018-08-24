@@ -1,4 +1,4 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.utils;
 
 public class Constants {
     public static final String BACK_BUTTON_ACTION = "back_click_action";

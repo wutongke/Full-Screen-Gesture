@@ -1,9 +1,9 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.service;
 
 import android.accessibilityservice.AccessibilityService;
-import android.provider.Settings;
-import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
+import com.zaot.fullscreengesture.utils.Constants;
+import com.zaot.fullscreengesture.utils.DLog;
 
 public class FullScreenAccessibilityService extends AccessibilityService {
 

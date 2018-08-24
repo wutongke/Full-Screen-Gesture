@@ -5,13 +5,16 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.Toast;
 import com.zaot.fullscreengesture.databinding.ActivityMainBinding;
+import com.zaot.fullscreengesture.floatwidowpermission.FloatWindowManager;
+import com.zaot.fullscreengesture.service.FullScreenAccessibilityService;
+import com.zaot.fullscreengesture.service.FullScreenService;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding activityMainBinding;
+    public View.OnClickListener requetFloatWindowPermission;
     public View.OnClickListener startService;
     public View.OnClickListener stopService;
 
@@ -48,6 +51,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent floatIntent = new Intent(MainActivity.this, FullScreenService.class);
                 floatIntent.putExtra(FullScreenService.ACTION, FullScreenService.SHOW);
                 MainActivity.this.stopService(floatIntent);
+            }
+        };
+
+        requetFloatWindowPermission = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FloatWindowManager floatWindowManager = FloatWindowManager.getInstance();
+                floatWindowManager.applyOrShowFloatWindow(v.getContext());
             }
         };
     }
