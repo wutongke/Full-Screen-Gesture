@@ -23,7 +23,9 @@ public class FullScreenAccessibilityService extends AccessibilityService {
                 case Constants.RECENT_APPLICATION_ACTION:
                     performGlobalAction(GLOBAL_ACTION_RECENTS);
                     break;
-
+                case Constants.LOCK_SCREEN:
+                    performGlobalAction(GLOBAL_ACTION_NOTIFICATIONS);
+                    break;
             }
         }
     }

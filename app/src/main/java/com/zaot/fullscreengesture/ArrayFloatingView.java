@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
@@ -35,6 +36,9 @@ public class ArrayFloatingView extends FrameLayout {
     private int rightStart;
     private int viewWidth = 60;
     private int viewHeight = 60;
+
+    private CheckForHold checkForHold;
+    private boolean detectHold;
 
     public ArrayFloatingView(Context context) {
         this(context, DEFAULT_TYPE);
@@ -70,6 +74,12 @@ public class ArrayFloatingView extends FrameLayout {
 
     public void hide() {
         windowManager.removeView(layoutView);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        layoutView.removeCallbacks(checkForHold);
     }
 
     private void initParentLayoutParams() {
@@ -113,85 +123,144 @@ public class ArrayFloatingView extends FrameLayout {
                 case MotionEvent.ACTION_DOWN:
                     touchStartX = (int) event.getRawX();
                     touchStartY = (int) event.getRawY();
-                    switch (type) {
-                        case LEFT_TYPE:
-                            layoutParams.topMargin = touchStartY;
-                            layoutParams.leftMargin = 0;
-                            layoutParams.bottomMargin = 0;
-                            layoutParams.rightMargin = 0;
-                            break;
-                        case RIGHT_TYPE:
-                            layoutParams.topMargin = touchStartY;
-                            layoutParams.leftMargin = 0;
-                            layoutParams.bottomMargin = 0;
-                            layoutParams.rightMargin = 0;
-                            break;
-                        case BOTTOM_TYPE:
-                            layoutParams.leftMargin = touchStartX;
-                            layoutParams.topMargin = 0;
-                            layoutParams.bottomMargin = 0;
-                            layoutParams.rightMargin = 0;
-                            break;
-                    }
+                    updateActionDownStatus();
                     arrayView.setLayoutParams(layoutParams);
+                    if (checkForHold == null) {
+                        checkForHold = new CheckForHold();
+                    }
+                    layoutView.postDelayed(checkForHold,
+                                           ViewConfiguration.getLongPressTimeout());
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    switch (type) {
-                        case LEFT_TYPE:
-                            parentLayoutParams.x += (int) event.getRawX() - touchStartX;
-                            parentLayoutParams.x = Math.min(parentLayoutParams.x, thresholdMaxValue);
-                            if (parentLayoutParams.x >= thresholdMiniValue) {
-                                arrayView.setVisibility(VISIBLE);
-                            }
-                            break;
-                        case RIGHT_TYPE:
-                            parentLayoutParams.x += (int) event.getRawX() - touchStartX;
-                            parentLayoutParams.x = Math.max(parentLayoutParams.x, rightStart - thresholdMaxValue);
-                            if (parentLayoutParams.x <= rightStart - thresholdMiniValue) {
-                                arrayView.setVisibility(VISIBLE);
-                            }
-                            break;
-                        case BOTTOM_TYPE:
-                            parentLayoutParams.y += (int) event.getRawY() - touchStartY;
-                            parentLayoutParams.y = Math.max(parentLayoutParams.y, bottomStart - thresholdMaxValue);
-                            if (parentLayoutParams.y <= bottomStart - thresholdMiniValue) {
-                                arrayView.setVisibility(VISIBLE);
-                            }
-                            break;
-                    }
+                    updateActionMoveStatus(event);
                     arrayView.setLayoutParams(layoutParams);
                     windowManager.updateView(layoutView, parentLayoutParams);
                     touchStartX = (int) event.getRawX();
                     touchStartY = (int) event.getRawY();
                     break;
                 case MotionEvent.ACTION_UP:
-                    switch (type) {
-                        case LEFT_TYPE:
-                            if (parentLayoutParams.x >= thresholdMaxValue) {
-                                AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
-                                                                                   Constants.BACK_BUTTON_ACTION);
-                            }
-                            break;
-                        case RIGHT_TYPE:
-                            if (parentLayoutParams.x <= rightStart - thresholdMaxValue) {
-                                AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
-                                                                                   Constants.BACK_BUTTON_ACTION);
-                            }
-                            break;
-                        case BOTTOM_TYPE:
-                            if (parentLayoutParams.y <= bottomStart - thresholdMaxValue) {
-                                AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
-                                                                                   Constants.BACK_HOME_ACTION);
-                            }
-                            break;
-                    }
-                    arrayView.setVisibility(INVISIBLE);
-                    resetParentLayoutParams();
-                    windowManager.updateView(layoutView, parentLayoutParams);
+                    takeAction();
+                    resetAllViews();
+                    break;
+                case MotionEvent.ACTION_CANCEL:
+                    layoutView.removeCallbacks(checkForHold);
                     break;
             }
             return true;
         }
     };
 
+    private void updateActionDownStatus() {
+        switch (type) {
+            case LEFT_TYPE:
+                layoutParams.topMargin = touchStartY;
+                layoutParams.leftMargin = 0;
+                layoutParams.bottomMargin = 0;
+                layoutParams.rightMargin = 0;
+                break;
+            case RIGHT_TYPE:
+                layoutParams.topMargin = touchStartY;
+                layoutParams.leftMargin = 0;
+                layoutParams.bottomMargin = 0;
+                layoutParams.rightMargin = 0;
+                break;
+            case BOTTOM_TYPE:
+                layoutParams.leftMargin = touchStartX;
+                layoutParams.topMargin = 0;
+                layoutParams.bottomMargin = 0;
+                layoutParams.rightMargin = 0;
+                break;
+        }
+    }
+
+    private void updateActionMoveStatus(MotionEvent event) {
+        switch (type) {
+            case LEFT_TYPE:
+                parentLayoutParams.x += (int) event.getRawX() - touchStartX;
+                parentLayoutParams.x = Math.min(parentLayoutParams.x, thresholdMaxValue);
+                if (parentLayoutParams.x >= thresholdMiniValue) {
+                    arrayView.setVisibility(VISIBLE);
+                }
+                break;
+            case RIGHT_TYPE:
+                parentLayoutParams.x += (int) event.getRawX() - touchStartX;
+                parentLayoutParams.x = Math.max(parentLayoutParams.x, rightStart - thresholdMaxValue);
+                if (parentLayoutParams.x <= rightStart - thresholdMiniValue) {
+                    arrayView.setVisibility(VISIBLE);
+                }
+                break;
+            case BOTTOM_TYPE:
+                parentLayoutParams.y += (int) event.getRawY() - touchStartY;
+                parentLayoutParams.y = Math.max(parentLayoutParams.y, bottomStart - thresholdMaxValue);
+                if (parentLayoutParams.y <= bottomStart - thresholdMiniValue) {
+                    arrayView.setVisibility(VISIBLE);
+                }
+                break;
+        }
+    }
+
+    private boolean takeAction() {
+        switch (type) {
+            case LEFT_TYPE:
+                if (parentLayoutParams.x >= thresholdMaxValue) {
+                    if (detectHold) {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.LOCK_SCREEN);
+                    } else {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.BACK_BUTTON_ACTION);
+                    }
+                    return true;
+                }
+                break;
+            case RIGHT_TYPE:
+                if (parentLayoutParams.x <= rightStart - thresholdMaxValue) {
+                    if (detectHold) {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.LOCK_SCREEN);
+                    } else {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.BACK_BUTTON_ACTION);
+                    }
+                    return true;
+                }
+                break;
+            case BOTTOM_TYPE:
+                if (parentLayoutParams.y <= bottomStart - thresholdMaxValue) {
+                    if (detectHold) {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.RECENT_APPLICATION_ACTION);
+                    } else {
+                        AccessibilityEventHelper.trySendAccessibilityEvent(layoutView,
+                                                                           Constants.BACK_HOME_ACTION);
+                    }
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
+    private void resetAllViews() {
+        arrayView.setVisibility(INVISIBLE);
+        resetParentLayoutParams();
+        windowManager.updateView(layoutView, parentLayoutParams);
+        layoutView.removeCallbacks(checkForHold);
+        detectHold = false;
+    }
+
+    private final class CheckForHold implements Runnable {
+
+        @Override
+        public void run() {
+            detectHold = true;
+            if (takeAction()) {
+                resetAllViews();
+            } else {
+                if (checkForHold != null) {
+                    layoutView.postDelayed(checkForHold, ViewConfiguration.getLongPressTimeout());
+                }
+            }
+        }
+    }
 }
