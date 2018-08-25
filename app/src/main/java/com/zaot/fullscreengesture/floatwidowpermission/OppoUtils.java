@@ -21,9 +21,6 @@ public class OppoUtils {
 
     private static final String TAG = "OppoUtils";
 
-    /**
-     * 检测 360 悬浮窗权限
-     */
     public static boolean checkFloatWindowPermission(Context context) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 19) {
@@ -50,9 +47,6 @@ public class OppoUtils {
         return false;
     }
 
-    /**
-     * oppo ROM 权限申请
-     */
     public static void applyOppoPermission(Context context) {
         //merge request from https://github.com/zhaozepeng/FloatWindowPermission/pull/26
         try {

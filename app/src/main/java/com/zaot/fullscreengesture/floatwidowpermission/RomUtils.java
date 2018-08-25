@@ -21,11 +21,6 @@ public class RomUtils {
 
     private static final String TAG = "RomUtils";
 
-    /**
-     * 获取 emui 版本号
-     *
-     * @return
-     */
     public static double getEmuiVersion() {
         try {
             String emuiVersion = getSystemProperty("ro.build.version.emui");
@@ -37,11 +32,6 @@ public class RomUtils {
         return 4.0;
     }
 
-    /**
-     * 获取小米 rom 版本号，获取失败返回 -1
-     *
-     * @return miui rom version code, if fail , return -1
-     */
     public static int getMiuiVersion() {
         String version = getSystemProperty("ro.miui.ui.version.name");
         if (version != null) {

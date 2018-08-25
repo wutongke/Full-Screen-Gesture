@@ -10,23 +10,22 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
+import com.zaot.fullscreengesture.R;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class FloatWindowManager {
+public class FloatWindowPermissionHelper {
 
-    private static final String TAG = "FloatWindowManager";
-
-    private static volatile FloatWindowManager instance;
-
+    private static final String TAG = "FloatWindowPermissionHelper";
+    private static volatile FloatWindowPermissionHelper instance;
     private Dialog dialog;
 
-    public static FloatWindowManager getInstance() {
+    public static FloatWindowPermissionHelper getInstance() {
         if (instance == null) {
-            synchronized (FloatWindowManager.class) {
+            synchronized (FloatWindowPermissionHelper.class) {
                 if (instance == null) {
-                    instance = new FloatWindowManager();
+                    instance = new FloatWindowPermissionHelper();
                 }
             }
         }
@@ -35,14 +34,13 @@ public class FloatWindowManager {
 
     public void applyOrShowFloatWindow(Context context) {
         if (checkPermission(context)) {
-            showWindow(context);
+            Toast.makeText(context, R.string.request_permission_success, Toast.LENGTH_SHORT).show();
         } else {
             applyPermission(context);
         }
     }
 
-    private boolean checkPermission(Context context) {
-        //6.0 版本之后由于 google 增加了对悬浮窗权限的管理，所以方式就统一了
+    public boolean checkPermission(Context context) {
         if (Build.VERSION.SDK_INT < 23) {
             if (RomUtils.checkIsMiuiRom()) {
                 return miuiPermissionCheck(context);
@@ -80,7 +78,6 @@ public class FloatWindowManager {
     }
 
     private boolean commonROMPermissionCheck(Context context) {
-        //最新发现魅族6.0的系统这种方式不好用，天杀的，只有你是奇葩，没办法，单独适配一下
         if (RomUtils.checkIsMeizuRom()) {
             return meizuPermissionCheck(context);
         } else {
@@ -98,7 +95,7 @@ public class FloatWindowManager {
         }
     }
 
-    private void applyPermission(Context context) {
+    public void applyPermission(Context context) {
         if (Build.VERSION.SDK_INT < 23) {
             if (RomUtils.checkIsMiuiRom()) {
                 miuiROMPermissionApply(context);
@@ -181,11 +178,7 @@ public class FloatWindowManager {
         });
     }
 
-    /**
-     * 通用 rom 权限申请
-     */
     private void commonROMPermissionApply(final Context context) {
-        //这里也一样，魅族系统需要单独适配
         if (RomUtils.checkIsMeizuRom()) {
             meizuROMPermissionApply(context);
         } else {
@@ -201,7 +194,6 @@ public class FloatWindowManager {
                             }
                         } else {
                             Log.d(TAG, "user manually refuse OVERLAY_PERMISSION");
-                            //需要做统计效果
                         }
                     }
                 });
@@ -220,7 +212,7 @@ public class FloatWindowManager {
     }
 
     private void showConfirmDialog(Context context, OnConfirmResult result) {
-        showConfirmDialog(context, "您的手机没有授予悬浮窗权限，请开启后再试", result);
+        showConfirmDialog(context, context.getResources().getString(R.string.request_permission), result);
     }
 
     private void showConfirmDialog(Context context, String message, final OnConfirmResult result) {
@@ -228,38 +220,38 @@ public class FloatWindowManager {
             dialog.dismiss();
         }
 
-        dialog = new AlertDialog.Builder(context).setCancelable(true).setTitle("")
-                                                 .setMessage(message)
-                                                 .setPositiveButton("现在去开启",
-                                                                    new DialogInterface.OnClickListener() {
-                                                                        @Override
-                                                                        public void onClick(DialogInterface dialog,
-                                                                                            int which) {
-                                                                            result.confirmResult(true);
-                                                                            dialog.dismiss();
-                                                                        }
-                                                                    }).setNegativeButton("暂不开启",
-                                                                                         new DialogInterface.OnClickListener() {
+        dialog = new AlertDialog
+            .Builder(context)
+            .setCancelable(true)
+            .setTitle("")
+            .setMessage(message)
+            .setPositiveButton(R.string.open_now,
+                               new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog,
+                                                       int which) {
+                                       result.confirmResult(true);
+                                       dialog.dismiss();
+                                   }
+                               })
+            .setNegativeButton(R.string.open_later,
+                               new DialogInterface.OnClickListener() {
 
-                                                                                             @Override
-                                                                                             public void onClick(
-                                                                                                 DialogInterface dialog,
-                                                                                                 int which) {
-                                                                                                 result.confirmResult(
-                                                                                                     false);
-                                                                                                 dialog.dismiss();
-                                                                                             }
-                                                                                         }).create();
+                                   @Override
+                                   public void onClick(
+                                       DialogInterface dialog,
+                                       int which) {
+                                       result.confirmResult(
+                                           false);
+                                       dialog.dismiss();
+                                   }
+                               }).create();
         dialog.show();
     }
 
     private interface OnConfirmResult {
 
         void confirmResult(boolean confirm);
-    }
-
-    private void showWindow(Context context) {
-        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
     }
 }
 

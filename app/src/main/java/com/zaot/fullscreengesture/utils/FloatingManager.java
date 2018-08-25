@@ -1,4 +1,4 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.utils;
 
 import android.content.Context;
 import android.view.View;
@@ -22,7 +22,7 @@ public class FloatingManager {
         mWindowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);//获得WindowManager对象
     }
 
-    protected boolean addView(View view, WindowManager.LayoutParams params) {
+    public boolean addView(View view, WindowManager.LayoutParams params) {
         try {
             mWindowManager.addView(view, params);
             return true;
@@ -32,7 +32,7 @@ public class FloatingManager {
         return false;
     }
 
-    protected boolean removeView(View view) {
+    public boolean removeView(View view) {
         try {
             mWindowManager.removeView(view);
             return true;
@@ -42,7 +42,7 @@ public class FloatingManager {
         return false;
     }
 
-    protected boolean updateView(View view, WindowManager.LayoutParams params) {
+    public boolean updateView(View view, WindowManager.LayoutParams params) {
         try {
             mWindowManager.updateViewLayout(view, params);
             return true;

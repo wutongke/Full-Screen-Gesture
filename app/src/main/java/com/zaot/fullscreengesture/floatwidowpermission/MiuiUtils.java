@@ -20,8 +20,6 @@ public class MiuiUtils {
     private static final String TAG = "MiuiUtils";
 
     /**
-     * 获取小米 rom 版本号，获取失败返回 -1
-     *
      * @return miui rom version code, if fail , return -1
      */
     public static int getMiuiVersion() {
@@ -37,9 +35,6 @@ public class MiuiUtils {
         return -1;
     }
 
-    /**
-     * 检测 miui 悬浮窗权限
-     */
     public static boolean checkFloatWindowPermission(Context context) {
         final int version = Build.VERSION.SDK_INT;
 
@@ -73,9 +68,6 @@ public class MiuiUtils {
         return false;
     }
 
-    /**
-     * 小米 ROM 权限申请
-     */
     public static void applyMiuiPermission(Context context) {
         int versionCode = getMiuiVersion();
         if (versionCode == 5) {
@@ -98,9 +90,6 @@ public class MiuiUtils {
         return context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY).size() > 0;
     }
 
-    /**
-     * 小米 V5 版本 ROM权限申请
-     */
     public static void goToMiuiPermissionActivity_V5(Context context) {
         Intent intent = null;
         String packageName = context.getPackageName();
@@ -133,9 +122,6 @@ public class MiuiUtils {
 //        }
     }
 
-    /**
-     * 小米 V6 版本 ROM权限申请
-     */
     public static void goToMiuiPermissionActivity_V6(Context context) {
         Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
         intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
@@ -149,9 +135,6 @@ public class MiuiUtils {
         }
     }
 
-    /**
-     * 小米 V7 版本 ROM权限申请
-     */
     public static void goToMiuiPermissionActivity_V7(Context context) {
         Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
         intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
@@ -165,9 +148,6 @@ public class MiuiUtils {
         }
     }
 
-    /**
-     * 小米 V8 版本 ROM权限申请
-     */
     public static void goToMiuiPermissionActivity_V8(Context context) {
         Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
         intent.setClassName("com.miui.securitycenter", "com.miui.permcenter.permissions.PermissionsEditorActivity");

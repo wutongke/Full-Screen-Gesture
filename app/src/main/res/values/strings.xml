@@ -1,3 +1,40 @@
 <resources>
     <string name="app_name">FullScreenGesture</string>
+    <string name="request_permission">Enable draw over other apps, then you can enjoy the amazing gesture</string>
+    <string name="open_now">Turn On</string>
+    <string name="open_later">Later</string>
+    <string name="request_permission_success">Turn on successfully!</string>
+    <string name="setting_manually">Set Manually</string>
+    <string name="request_accessibility_success">Turn on successfully!</string>
+
+    <string name="home_title">Home</string>
+    <string name="home_sub_title">Swipe up</string>
+    <string name="back_title">Go Back</string>
+    <string name="back_sub_title">Swipe left or right</string>
+    <string name="recent_title">Recent App</string>
+    <string name="recent_sub_title">Swipe up and hold</string>
+
+    <string name="tab_guideline">GuideLine</string>
+    <string name="tab_instrument">Operation</string>
+    <string name="tab_about">About</string>
+
+    <string name="request_float_window_permission">1. Allow show view on other apps</string>
+    <string name="request_float_window_permission_des">Allow show view on other apps to enable gesture in all apps</string>
+    <string name="status">Status：</string>
+    <string name="statu_on">On</string>
+    <string name="status_off">Off</string>
+    <string name="request_accessibility_permission">2. Enable gesture accessibility</string>
+    <string name="request_accessibility_permission_des">Enable go back, go home, etc</string>
+    <string name="step_three">3. Enjoy gesture control</string>
+    <string name="start_service">Start</string>
+    <string name="stop_service">Close</string>
+    <string name="turn_on">Turn On</string>
+
+    <string name="keep_fullscreen_gesture">Gesture Helper is Running</string>
+    <string name="fullscreen_gesture_notification_tab">Tab to show more info</string>
+
+    <string name="need_float_window_permission">Need allow show view over other apps</string>
+    <string name="need_accessibility">Need turn on gesture accessibility</string>
+
+    <string name="gesture_service_on">Enjoy gesture control</string>
 </resources>

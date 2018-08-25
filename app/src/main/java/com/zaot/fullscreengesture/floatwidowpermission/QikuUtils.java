@@ -17,9 +17,6 @@ import java.lang.reflect.Method;
 public class QikuUtils {
     private static final String TAG = "QikuUtils";
 
-    /**
-     * 检测 360 悬浮窗权限
-     */
     public static boolean checkFloatWindowPermission(Context context) {
         final int version = Build.VERSION.SDK_INT;
         if (version >= 19) {
@@ -46,9 +43,6 @@ public class QikuUtils {
         return false;
     }
 
-    /**
-     * 去360权限申请页面
-     */
     public static void applyPermission(Context context) {
         Intent intent = new Intent();
         intent.setClassName("com.android.settings", "com.android.settings.Settings$OverlaySettingsActivity");

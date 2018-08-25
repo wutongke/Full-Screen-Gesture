@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.zaot.fullscreengesture.view.InstrumentFragment"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_16">
+
+        <TextView
+            android:id="@+id/step_one_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/request_float_window_permission"
+            android:textAppearance="@style/title"/>
+
+        <TextView
+            android:id="@+id/step_one_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:text="@string/request_float_window_permission_des"
+            android:textAppearance="@style/subtitle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/checkpermission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{model.requestFloatWindowPermission}"
+                android:text="@string/turn_on"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:text="@{model.fLoatWindowPermissionStatus}"
+                tools:text="On"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/step_two_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/request_accessibility_permission"
+            android:textAppearance="@style/title"/>
+
+        <TextView
+            android:id="@+id/step_two_des"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:text="@string/request_accessibility_permission_des"
+            android:textAppearance="@style/subtitle"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/requestAccessibilityPermission"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{model.requestAccessibilityPermission}"
+                android:text="@string/turn_on"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:text="@{model.gestureAccessibilityAStatus}"
+                tools:text="On"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/step_three_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/step_three"
+            android:textAppearance="@style/title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{model.startService}"
+                android:text="@string/start_service"/>
+
+            <Button
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_weight="1"
+                android:onClick="@{model.stopService}"
+                android:text="@string/stop_service"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

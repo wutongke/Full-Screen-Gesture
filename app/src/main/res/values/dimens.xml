@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sub_title_margin_left">20dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="tab_icon_size">35dp</dimen>
+    <dimen name="tab_text_margin">5dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+</resources>

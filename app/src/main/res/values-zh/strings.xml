@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">全面屏</string>
+    <string name="request_permission">允许使用悬浮窗</string>
+    <string name="open_now">打开</string>
+    <string name="open_later">稍后</string>
+    <string name="request_permission_success">悬浮窗权限已经开启</string>
+    <string name="setting_manually">手动设置</string>
+    <string name="request_accessibility_success">手势辅助已经开启</string>
+
+    <string name="home_title">回到桌面</string>
+    <string name="home_sub_title">从屏幕底部向上轻滑</string>
+    <string name="back_title">回到上级页面</string>
+    <string name="back_sub_title">从屏幕左侧或右侧向中间轻滑</string>
+    <string name="recent_title">查看后台应用</string>
+    <string name="recent_sub_title">从屏幕底部向上轻滑并停留(滑动后长按)</string>
+
+    <string name="tab_guideline">教程</string>
+    <string name="tab_instrument">操作</string>
+    <string name="tab_about">关于</string>
+
+    <string name="request_float_window_permission">1. 打开悬浮窗权限</string>
+    <string name="request_float_window_permission_des">开启后可以在任意App中使用手势</string>
+    <string name="status">状态：</string>
+    <string name="statu_on">已开启</string>
+    <string name="status_off">未开启</string>
+    <string name="request_accessibility_permission">2. 打开手势助手</string>
+    <string name="request_accessibility_permission_des">开启后才可以通过手势执行返回上一级、回到桌面等行为</string>
+    <string name="step_three">3. 开始使用</string>
+    <string name="start_service">启动</string>
+    <string name="stop_service">关闭</string>
+    <string name="turn_on">开启</string>
+
+    <string name="keep_fullscreen_gesture">手势助手正在运行</string>
+    <string name="fullscreen_gesture_notification_tab">点击查看更多信息</string>
+
+    <string name="need_float_window_permission">需要先开启悬浮窗权限</string>
+    <string name="need_accessibility">需要开启手势辅助</string>
+
+    <string name="gesture_service_on">已经可以使用了</string>
+</resources>

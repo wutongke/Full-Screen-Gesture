@@ -1,4 +1,4 @@
-package com.zaot.fullscreengesture;
+package com.zaot.fullscreengesture.service;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -13,7 +13,10 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import com.zaot.fullscreengesture.utils.AccessibilityEventHelper;
+import com.zaot.fullscreengesture.R;
 import com.zaot.fullscreengesture.utils.Constants;
+import com.zaot.fullscreengesture.utils.FloatingManager;
 
 public class ArrayFloatingView extends FrameLayout {
 

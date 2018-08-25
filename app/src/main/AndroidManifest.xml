@@ -31,7 +31,7 @@
                 android:resource="@xml/accessibility_service_config"/> <!--注意此处-->
         </service>
 
-        <service android:name=".service.FullScreenService"/>
+        <service android:name=".service.FullScreenGestureService"/>
     </application>
 
 </manifest>
