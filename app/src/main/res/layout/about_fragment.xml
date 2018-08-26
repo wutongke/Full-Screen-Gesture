@@ -1,27 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.zaot.fullscreengesture.view.AboutFragment"/>
+    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/name"
+        <ImageView
+            android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/version"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:text="wutong"/>
+            android:layout_marginTop="@dimen/margin_80"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_16"
+            android:text="@string/gesture_control_about"
+            android:textAppearance="@style/title"/>
 
         <TextView
             android:id="@+id/version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/copyright"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:text="@{model.version}"
+            android:textAppearance="@style/subtitle"
+            tools:text="@string/gesture_control_version"/>
+
+        <TextView
+            android:id="@+id/copyright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:text="2.0"/>
+            android:layout_marginBottom="@dimen/margin_20"
+            android:text="@string/gesture_control_right"
+            android:textAppearance="@style/subtitle"/>
     </RelativeLayout>
 </layout>

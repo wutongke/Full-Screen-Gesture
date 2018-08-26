@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FullScreenGesture</string>
+    <string name="app_name">Gesture Control</string>
     <string name="request_permission">Enable draw over other apps, then you can enjoy the amazing gesture</string>
     <string name="open_now">Turn On</string>
     <string name="open_later">Later</string>
@@ -36,5 +36,11 @@
     <string name="need_float_window_permission">Need allow show view over other apps</string>
     <string name="need_accessibility">Need turn on gesture accessibility</string>
 
-    <string name="gesture_service_on">Enjoy gesture control</string>
+    <string name="gesture_service_on">Enjoy gesture control!</string>
+    <string name="gesture_service_off">Gesture control off</string>
+
+    <string name="gesture_control_introduce">You can go back, go home, switch app quickly with Gesture Control</string>
+    <string name="gesture_control_about">Gesture Control is a open source app</string>
+    <string name="gesture_control_version">Current Version: %1$s</string>
+    <string name="gesture_control_right">©Gesture Control Develop Platform</string>
 </resources>
