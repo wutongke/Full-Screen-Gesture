@@ -2,6 +2,7 @@ package com.zaot.fullscreengesture.view;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -66,7 +67,11 @@ public class InstrumentFragment extends Fragment {
                     getActivity().startService(new Intent(getActivity(), FullScreenAccessibilityService.class));
                     Intent floatIntent = new Intent(getActivity(), FullScreenGestureService.class);
                     floatIntent.putExtra(FullScreenGestureService.ACTION, FullScreenGestureService.SHOW);
-                    getActivity().startService(floatIntent);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        getActivity().startForegroundService(floatIntent);
+                    } else {
+                        getActivity().startService(floatIntent);
+                    }
                     Toast.makeText(getActivity(), R.string.gesture_service_on, Toast.LENGTH_SHORT).show();
                 }
             }
