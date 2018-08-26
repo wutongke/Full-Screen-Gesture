@@ -6,4 +6,5 @@
     android:notificationTimeout="100"
     android:accessibilityFlags="flagDefault"
     android:packageNames="com.zaot.fullscreengesture"
+    android:description="@string/gesture_control_introduce"
     android:canRetrieveWindowContent="true"/>

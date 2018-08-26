@@ -78,6 +78,7 @@ public class InstrumentFragment extends Fragment {
                 Intent floatIntent = new Intent(getActivity(), FullScreenGestureService.class);
                 floatIntent.putExtra(FullScreenGestureService.ACTION, FullScreenGestureService.SHOW);
                 getActivity().stopService(floatIntent);
+                Toast.makeText(getActivity(), R.string.gesture_service_off, Toast.LENGTH_SHORT).show();
             }
         };
 
