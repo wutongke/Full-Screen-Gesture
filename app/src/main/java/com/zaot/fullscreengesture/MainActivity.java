@@ -11,7 +11,7 @@ import com.zaot.fullscreengesture.view.AboutFragment;
 import com.zaot.fullscreengesture.view.GuidelineFragment;
 import com.zaot.fullscreengesture.view.InstrumentFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private MainActivityBinding mainActivityBinding;
     public View.OnClickListener tabClick;

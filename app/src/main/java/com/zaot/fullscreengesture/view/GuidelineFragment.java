@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.zaot.fullscreengesture.R;
 
-public class GuidelineFragment extends Fragment {
+public class GuidelineFragment extends BaseFragment {
 
     @Nullable
     @Override
@@ -17,5 +17,10 @@ public class GuidelineFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.guideline_fragment, container, false);
+    }
+
+    @Override
+    protected String getPageKey() {
+        return "guideline";
     }
 }

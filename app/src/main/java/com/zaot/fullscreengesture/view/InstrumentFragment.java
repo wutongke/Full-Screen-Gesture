@@ -18,7 +18,7 @@ import com.zaot.fullscreengesture.service.FullScreenAccessibilityService;
 import com.zaot.fullscreengesture.service.FullScreenGestureService;
 import com.zaot.fullscreengesture.utils.OpenAccessibilitySettingHelper;
 
-public class InstrumentFragment extends Fragment {
+public class InstrumentFragment extends BaseFragment {
 
     private OperationFragmentBinding operationFragmentBinding;
     public View.OnClickListener requestFloatWindowPermission;
@@ -124,5 +124,10 @@ public class InstrumentFragment extends Fragment {
                                       getResources().getString(R.string.statu_on)
                                       :
                                       getResources().getString(R.string.status_off);
+    }
+
+    @Override
+    protected String getPageKey() {
+        return "instrument";
     }
 }
