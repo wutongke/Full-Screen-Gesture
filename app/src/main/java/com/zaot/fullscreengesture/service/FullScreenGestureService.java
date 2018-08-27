@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.IBinder;
 import com.zaot.fullscreengesture.MainActivity;
 import com.zaot.fullscreengesture.R;
+import com.zaot.fullscreengesture.utils.NotificationBundle;
+import com.zaot.fullscreengesture.view.ArrayFloatingView;
 
 public class FullScreenGestureService extends Service {
 
@@ -34,7 +36,7 @@ public class FullScreenGestureService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        setupForgroundNotification();
+        setupForegroundNotification();
         if (intent != null) {
             String action = intent.getStringExtra(ACTION);
             if (SHOW.equals(action)) {
@@ -51,8 +53,9 @@ public class FullScreenGestureService extends Service {
         return START_STICKY;
     }
 
-    private void setupForgroundNotification() {
+    private void setupForegroundNotification() {
         Intent activityIntent = new Intent(this, MainActivity.class);
+        activityIntent.putExtra(NotificationBundle.TAB_TO_OPEN, NotificationBundle.instrument_tab);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, activityIntent, 0);
         Notification notification;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -1,9 +1,9 @@
-package com.zaot.fullscreengesture.service;
+package com.zaot.fullscreengesture.view;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.graphics.Point;
 import android.os.Build;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,8 +14,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.zaot.fullscreengesture.utils.AccessibilityEventHelper;
 import com.zaot.fullscreengesture.R;
+import com.zaot.fullscreengesture.utils.AccessibilityEventHelper;
 import com.zaot.fullscreengesture.utils.Constants;
 import com.zaot.fullscreengesture.utils.FloatingManager;
 
@@ -60,10 +60,10 @@ public class ArrayFloatingView extends FrameLayout {
         windowManager = FloatingManager.getInstance(applicationContext);
 
         WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
-        final DisplayMetrics displayMetrics = new DisplayMetrics();
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        bottomStart = displayMetrics.heightPixels - viewHeight;
-        rightStart = displayMetrics.widthPixels - viewWidth;
+        Point point = new Point();
+        windowManager.getDefaultDisplay().getRealSize(point);
+        bottomStart = point.y - viewHeight;
+        rightStart = point.x - viewWidth;
         parentLayoutParams = new WindowManager.LayoutParams();
         layoutParams = (RelativeLayout.LayoutParams) arrayView.getLayoutParams();
 

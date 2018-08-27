@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.zaot.fullscreengesture.databinding.MainActivityBinding;
+import com.zaot.fullscreengesture.utils.NotificationBundle;
 import com.zaot.fullscreengesture.view.AboutFragment;
 import com.zaot.fullscreengesture.view.GuidelineFragment;
 import com.zaot.fullscreengesture.view.InstrumentFragment;
@@ -31,10 +32,26 @@ public class MainActivity extends AppCompatActivity {
         guidelineFragment = new GuidelineFragment();
         instrumentFragment = new InstrumentFragment();
         aboutFragment = new AboutFragment();
+        Fragment currentFragment = guidelineFragment;
+        if (getIntent() != null) {
+            switch (getIntent().getIntExtra(NotificationBundle.TAB_TO_OPEN, 0)) {
+                case NotificationBundle.guideline_tab:
+                    currentFragment = guidelineFragment;
+                    selectIcon(R.id.guideline_layout);
+                    break;
+                case NotificationBundle.instrument_tab:
+                    currentFragment = instrumentFragment;
+                    selectIcon(R.id.instrument_layout);
+                    break;
+                case NotificationBundle.about_tab:
+                    currentFragment = aboutFragment;
+                    selectIcon(R.id.about_layout);
+                    break;
+            }
+        }
         getSupportFragmentManager().beginTransaction()
-                                   .replace(R.id.main_fragment, guidelineFragment)
+                                   .replace(R.id.main_fragment, currentFragment)
                                    .commit();
-        selectIcon(R.id.guideline_layout);
     }
 
     private void selectIcon(int tabId) {

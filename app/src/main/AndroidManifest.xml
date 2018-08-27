@@ -21,14 +21,14 @@
 
         <service
             android:name=".service.FullScreenAccessibilityService"
-            android:label="手势辅助"
+            android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService"/>
             </intent-filter>
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config"/> <!--注意此处-->
+                android:resource="@xml/accessibility_service_config"/>
         </service>
 
         <service android:name=".service.FullScreenGestureService"/>
