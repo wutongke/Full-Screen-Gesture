@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
 import com.zaot.fullscreengesture.MainActivity;
 import com.zaot.fullscreengesture.R;
@@ -53,8 +54,9 @@ public class FullScreenGestureService extends Service {
     private void setupForgroundNotification() {
         Intent activityIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, activityIntent, 0);
-        Notification notification =
-            new Notification.Builder(getApplication())
+        Notification notification;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notification = new Notification.Builder(getApplication(), getPackageName())
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setTicker(getResources().getString(R.string.app_name))
@@ -63,6 +65,17 @@ public class FullScreenGestureService extends Service {
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(pendingIntent)
                 .build();
+        } else {
+            notification = new Notification.Builder(getApplication())
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setTicker(getResources().getString(R.string.app_name))
+                .setContentTitle(getResources().getString(R.string.keep_fullscreen_gesture))
+                .setContentText(getResources().getString(R.string.fullscreen_gesture_notification_tab))
+                .setWhen(System.currentTimeMillis())
+                .setContentIntent(pendingIntent)
+                .build();
+        }
         startForeground(1, notification);
     }
 

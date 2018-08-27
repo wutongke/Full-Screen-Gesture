@@ -2,6 +2,7 @@ package com.zaot.fullscreengesture.service;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -89,7 +90,11 @@ public class ArrayFloatingView extends FrameLayout {
     private void initParentLayoutParams() {
         resetParentLayoutParams();
         parentLayoutParams.gravity = Gravity.TOP | Gravity.START;
-        parentLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            parentLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        } else {
+            parentLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        }
         parentLayoutParams.format = PixelFormat.RGBA_8888;
         parentLayoutParams.flags =
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
