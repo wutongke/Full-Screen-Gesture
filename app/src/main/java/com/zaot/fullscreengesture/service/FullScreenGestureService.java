@@ -1,8 +1,11 @@
 package com.zaot.fullscreengesture.service;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
@@ -59,7 +62,18 @@ public class FullScreenGestureService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, activityIntent, 0);
         Notification notification;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notification = new Notification.Builder(getApplication(), getPackageName())
+
+            String channelId = getResources().getString(R.string.app_name);
+            String channelName = getResources().getString(R.string.app_name);
+            String channelDescription = getResources().getString(R.string.gesture_control_introduce);
+
+            NotificationChannel notificationChannel =
+                new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationChannel.setDescription(channelDescription);
+            ((NotificationManager) getApplication().getSystemService(Context.NOTIFICATION_SERVICE)).createNotificationChannel(
+                notificationChannel);
+
+            notification = new Notification.Builder(getApplication(), channelId)
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setTicker(getResources().getString(R.string.app_name))
