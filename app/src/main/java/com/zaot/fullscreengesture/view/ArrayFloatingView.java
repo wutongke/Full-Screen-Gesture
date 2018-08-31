@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Build;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,12 +36,12 @@ public class ArrayFloatingView extends FrameLayout {
 
     private static int DEFAULT_TYPE = LEFT_TYPE;
     private int type = DEFAULT_TYPE;
-    private int thresholdMaxValue = 100;
-    private int thresholdMiniValue = 50;
+    private int thresholdMaxValue = 80;
+    private int thresholdMiniValue = 30;
     private int bottomStart;
     private int rightStart;
-    private int viewWidth = 60;
-    private int viewHeight = 60;
+    private int viewWidth = 8;
+    private int viewHeight = 8;
 
     private CheckForHold checkForHold;
     private boolean detectHold;
@@ -62,8 +63,10 @@ public class ArrayFloatingView extends FrameLayout {
         WindowManager windowManager = (WindowManager) applicationContext.getSystemService(Context.WINDOW_SERVICE);
         Point point = new Point();
         windowManager.getDefaultDisplay().getRealSize(point);
-        bottomStart = point.y - viewHeight;
-        rightStart = point.x - viewWidth;
+        DisplayMetrics metrics = new DisplayMetrics();
+        windowManager.getDefaultDisplay().getRealMetrics(metrics);
+        bottomStart = (int) (point.y - viewHeight * metrics.density);
+        rightStart = (int) (point.x - viewWidth * metrics.density);
         parentLayoutParams = new WindowManager.LayoutParams();
         layoutParams = (RelativeLayout.LayoutParams) arrayView.getLayoutParams();
 
@@ -189,6 +192,8 @@ public class ArrayFloatingView extends FrameLayout {
                 parentLayoutParams.x = Math.min(parentLayoutParams.x, thresholdMaxValue);
                 if (parentLayoutParams.x >= thresholdMiniValue) {
                     arrayView.setVisibility(VISIBLE);
+                } else {
+                    arrayView.setVisibility(GONE);
                 }
                 break;
             case RIGHT_TYPE:
@@ -196,6 +201,8 @@ public class ArrayFloatingView extends FrameLayout {
                 parentLayoutParams.x = Math.max(parentLayoutParams.x, rightStart - thresholdMaxValue);
                 if (parentLayoutParams.x <= rightStart - thresholdMiniValue) {
                     arrayView.setVisibility(VISIBLE);
+                } else {
+                    arrayView.setVisibility(GONE);
                 }
                 break;
             case BOTTOM_TYPE:
@@ -203,6 +210,8 @@ public class ArrayFloatingView extends FrameLayout {
                 parentLayoutParams.y = Math.max(parentLayoutParams.y, bottomStart - thresholdMaxValue);
                 if (parentLayoutParams.y <= bottomStart - thresholdMiniValue) {
                     arrayView.setVisibility(VISIBLE);
+                } else {
+                    arrayView.setVisibility(GONE);
                 }
                 break;
         }
@@ -251,7 +260,7 @@ public class ArrayFloatingView extends FrameLayout {
     }
 
     private void resetAllViews() {
-        arrayView.setVisibility(INVISIBLE);
+        arrayView.setVisibility(GONE);
         resetParentLayoutParams();
         windowManager.updateView(layoutView, parentLayoutParams);
         layoutView.removeCallbacks(checkForHold);

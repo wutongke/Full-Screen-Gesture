@@ -5,11 +5,16 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
+    <View
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:background="@android:color/transparent"/>
+
     <ImageView
         android:id="@+id/arrow"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:scaleType="fitEnd"
         android:src="@drawable/right_arrow"
-        android:visibility="invisible"/>
+        android:visibility="gone"/>
 </RelativeLayout>
