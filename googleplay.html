@@ -11,7 +11,14 @@
 
     <script>
         function openGooglePlay() {
-            window.location.href = "https://play.google.com/store";
+            // Package name for Google Play Store app
+            var playStorePackageName = "com.android.vending";
+
+            // Intent URL to open Google Play Store
+            var intentUrl = "market://details?id=" + playStorePackageName;
+
+            // Open the Google Play Store app if available, else open in browser
+            window.location.href = intentUrl;
         }
     </script>
 </body>
