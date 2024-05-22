@@ -11,7 +11,7 @@
      <button onclick="openGooglePlay()">Open Google Play</button>
 
      <h1>Click the button below to open App store</h1>
-     <button onclick="Redirect()">Open App Store</button>
+     <button onclick="redirect()">Redirect</button>
 
      <script>
          function openGooglePlay() {
@@ -24,11 +24,11 @@
              // Open the Google Play Store app if available, else open in browser
              window.location.href = intentUrl;
          }
-         function openAppStore() {
+         function redirect() {
 
-             var intentUrl = "https://wutongke.github.io/Full-Screen-Gesture/redirect.html";
+             var redirect = "https://wutongke.github.io/Full-Screen-Gesture/redirect.html";
 
-             window.location.href = intentUrl;
+             window.location.href = redirect;
          }
      </script>
  </body>
