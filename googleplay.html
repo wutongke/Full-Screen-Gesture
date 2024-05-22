@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Newsbreak on Google Play</title>
-    <script>
-        window.location.href = "https://play.google.com/store/apps/details?id=com.particlenews.newsbreak&hl=en&gl=US";
-    </script>
-</head>
-<body>
-    <h1>Redirecting...</h1>
-</body>
-</html>
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Open App Store Testing</title>
+
+ </head>
+ <body>
+     <h1>Click the button below to open Google Play</h1>
+     <button onclick="openGooglePlay()">Open Google Play</button>
+
+     <h1>Click the button below to open App store</h1>
+     <button onclick="Redirect()">Open App Store</button>
+
+     <script>
+         function openGooglePlay() {
+             // Package name for Google Play Store app
+             var playStorePackageName = "com.particlenews.newsbreak";
+
+             // Intent URL to open Google Play Store
+             var intentUrl = "https://newsbreakapp.onelink.me/U4ti?pid=i1&af_dp=newsbreak%3A%2F%2Fopendoc%3Fdocid%3D0syFIZe7%26s%3Dnewsbreak.com%26triggerFrom%3Dcontent";
+
+             // Open the Google Play Store app if available, else open in browser
+             window.location.href = intentUrl;
+         }
+         function openAppStore() {
+
+             var intentUrl = "https://wutongke.github.io/Full-Screen-Gesture/redirect.html";
+
+             window.location.href = intentUrl;
+         }
+     </script>
+ </body>
+ </html>
