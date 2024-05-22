@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to Newsbreak on Google Play</title>
+    <script>
+        window.location.href = "https://play.google.com/store/apps/details?id=com.particlenews.newsbreak&hl=en&gl=US";
+    </script>
+</head>
+<body>
+    <h1>Redirecting...</h1>
+</body>
+</html>
